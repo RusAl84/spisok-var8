@@ -61,6 +61,7 @@ void input_item(char cc)
 		pCurrent->next_item = pCurrent;    // совпадает с адресом последующего эл-та
 		pTemp = pCurrent;                  // запомнили тек. адрес, потребуется при вводе 
 											// следующего эл-та		
+
 	}
 	else
 	{
