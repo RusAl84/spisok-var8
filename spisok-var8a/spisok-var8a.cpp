@@ -27,6 +27,7 @@ void print_spis();              // печать всего списка
 void add_item(char, char);         // функация добавления элемента в список 1 аргумент
 								// перед каким добавляем 2-ой что добавляем
 Spis* find_item(char);    // поиск элемента списка по его значению возвращает адрес 
+void del_item(char);             // функция удаления элемента списка по его значению
 int main()
 {
     
@@ -39,8 +40,8 @@ input_item('u');
 input_item('s');
 input_item('m');
 print_spis();
-std::cout << "----------------\n";
-add_item('s', 'r');
+cout << "----------------\n";
+del_item('s');
 print_spis();
 }
 
@@ -144,4 +145,30 @@ Spis* find_item(char value)
 		cout << "элемента с зачением=" << value << " нет в списке" << endl;
 		return NULL;
 	}
+}
+
+void del_item(char c) {
+	int flag = 0;
+	pCurrent = pStart;
+	for (int i = 0; i <= count0; i++)
+	{
+		if (pCurrent->c == c)
+		{
+			flag = 1;
+			// берем в найденном элементе адрес предыдущего и в поле следующего
+			// предыдущего элемента записываем значение следующего из найденного
+			pCurrent->previous_item->next_item = pCurrent->next_item;
+
+			//берем в найденном элементе адрес последующего и в поле предыдущего
+			// следущего элемента записываем значение предыдущего из найденного
+			pCurrent->next_item->previous_item = pCurrent->previous_item;
+			delete pCurrent;
+			count0 -= 1;
+			return;
+		}
+		else
+			pCurrent = pCurrent->next_item;
+	}
+	if (!flag) cout << "элемента с id=" << c << " нет в списке" << endl;
+
 }
